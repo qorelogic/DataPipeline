@@ -7,5 +7,12 @@ from scrapy.item import Item, Field
 
 class NumbeoItem(Item):
     # define the fields for your item here like:
-    # name = Field()
+    city = Field()
+    priceToIncomeRatio = Field()
+    grossRentalYieldCityCentre = Field()
+    grossRentalYieldOutsideOfCentre = Field()
+    priceToRentRatioCityCentre = Field()
+    priceToRentRatioOutsideOfCityCentre = Field()
+    mortgageAsAPercentageOfIncome = Field()
+    affordabilityIndex = Field()
     pass
