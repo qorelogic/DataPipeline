@@ -21,4 +21,8 @@ class FreelancerItem(Item):
     # define the fields for your item here like:
     project = Field()
     description = Field()
+    bids = Field()
+    skills = Field()
+    started = Field()
+    price = Field()
     pass
