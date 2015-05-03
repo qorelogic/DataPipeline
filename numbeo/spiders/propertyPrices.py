@@ -18,18 +18,20 @@ class PropertypricesSpider(CrawlSpider):
         Rule(SgmlLinkExtractor(allow=r'/property-investment/rankings_current.jsp'), callback='parse_item', follow=True),
     )
 
+    # scrapy parse --spider=propertyPrices -c parse_item 'http://www.numbeo.com/property-investment/rankings_current.jsp'
     def parse_item(self, response):
         hxs = HtmlXPathSelector(response)
-        i = NumbeoItem()
-        i['city'] = hxs.select('//*[@id="t2"]/tbody/tr/td[1]/a/text()').extract()
-        i['priceToIncomeRatio'] = hxs.select('//tbody/tr/td[2]/text()').extract()
-        i['grossRentalYieldCityCentre'] = hxs.select('//tbody/tr/td[3]/text()').extract()
-        i['grossRentalYieldOutsideOfCentre'] = hxs.select('//tbody/tr/td[4]/text()').extract()
-        i['priceToRentRatioCityCentre'] = hxs.select('//tbody/tr/td[5]/text()').extract()
-        i['priceToRentRatioOutsideOfCityCentre'] = hxs.select('//tbody/tr/td[6]/text()').extract()
-        i['mortgageAsAPercentageOfIncome'] = hxs.select('//tbody/tr/td[7]/text()').extract()
-        i['affordabilityIndex'] = hxs.select('//tbody/tr/td[8]/text()').extract()
+        item = NumbeoItem(
+            city                                = hxs.select('//*[@id="t2"]/tbody/tr/td[1]/a/text()').extract(),
+            priceToIncomeRatio                  = hxs.select('//tbody/tr/td[2]/text()').extract(),
+            grossRentalYieldCityCentre          = hxs.select('//tbody/tr/td[3]/text()').extract(),
+            grossRentalYieldOutsideOfCentre     = hxs.select('//tbody/tr/td[4]/text()').extract(),
+            priceToRentRatioCityCentre          = hxs.select('//tbody/tr/td[5]/text()').extract(),
+            priceToRentRatioOutsideOfCityCentre = hxs.select('//tbody/tr/td[6]/text()').extract(),
+            mortgageAsAPercentageOfIncome       = hxs.select('//tbody/tr/td[7]/text()').extract(),
+            affordabilityIndex                  = hxs.select('//tbody/tr/td[8]/text()').extract(),
+        )
         
-        i = self.qs.makeItems(i, 'numbeo.items.NumbeoItem')
-        print i
-        return i
+        item = self.qs.makeItems(item, 'numbeo.items.NumbeoItem')
+        print item
+        return item
