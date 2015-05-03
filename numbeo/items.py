@@ -16,3 +16,9 @@ class NumbeoItem(Item):
     mortgageAsAPercentageOfIncome = Field()
     affordabilityIndex = Field()
     pass
+
+class FreelancerItem(Item):
+    # define the fields for your item here like:
+    project = Field()
+    description = Field()
+    pass

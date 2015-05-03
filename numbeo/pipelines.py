@@ -135,11 +135,15 @@ class SQLitePipeline(object):
         else:
         """
         print item
-        self.cursor.execute(
-            "insert into {0} (city, priceToIncomeRatio, grossRentalYieldCityCentre, grossRentalYieldOutsideOfCentre, priceToRentRatioCityCentre, priceToRentRatioOutsideOfCityCentre, mortgageAsAPercentageOfIncome, affordabilityIndex) values (?, ?, ?, ?, ?, ?, ?, ?)".format(spider.name),
-                (item['city'], item['priceToIncomeRatio'], item['grossRentalYieldCityCentre'], item['grossRentalYieldOutsideOfCentre'], item['priceToRentRatioCityCentre'], item['priceToRentRatioOutsideOfCityCentre'], item['mortgageAsAPercentageOfIncome'], item['affordabilityIndex']))
-
-        self.connection.commit()
+        try:
+            self.cursor.execute(
+                "insert into {0} (city, priceToIncomeRatio, grossRentalYieldCityCentre, grossRentalYieldOutsideOfCentre, priceToRentRatioCityCentre, priceToRentRatioOutsideOfCityCentre, mortgageAsAPercentageOfIncome, affordabilityIndex) values (?, ?, ?, ?, ?, ?, ?, ?)".format(spider.name),
+                    (item['city'], item['priceToIncomeRatio'], item['grossRentalYieldCityCentre'], item['grossRentalYieldOutsideOfCentre'], item['priceToRentRatioCityCentre'], item['priceToRentRatioOutsideOfCityCentre'], item['mortgageAsAPercentageOfIncome'], item['affordabilityIndex']))
+            self.connection.commit()
+        except:
+            ''
+            #import sys
+            #sys.exit()
 
         log.msg("Item stored : " % item, level=log.DEBUG)
         return item
