@@ -26,3 +26,8 @@ class FreelancerItem(Item):
     started = Field()
     price = Field()
     pass
+
+class BillionaireItem(Item):
+    # define the fields for your item here like:
+    name = Field()
+    rank = Field()
