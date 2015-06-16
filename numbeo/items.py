@@ -47,3 +47,9 @@ class CryptocoinsItem(Item):
     percent_1hr = Field()
     percent_24hr = Field()
     percent_7days = Field()
+
+class AmbitousdarsblueItem(Item):
+    # define the fields for your item here like:
+    fecha  = Field()
+    compra = Field()
+    venta  = Field()
