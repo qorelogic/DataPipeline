@@ -3,7 +3,7 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from numbeo.items import AmbitousdarsblueItem
 
-import sys
+import sys, time
 try:    sys.path.index('/ml.dev/bin')
 except: sys.path.append('/ml.dev/bin')
 from qore import QoreScrapy
@@ -11,14 +11,16 @@ from qore import QoreScrapy
 class AmbitousdarsblueSpider(CrawlSpider):
     name = 'ambitoUSDARSblue'
     allowed_domains = ['ambito.com']
-    start_urls = ['http://www.ambito.com/economia/mercados/monedas/dolar/info/?ric=ARSB=&desde=11/01/2002&hasta=15/06/2015&pag=1']
+    time.time()
+    mdate = time.strftime('%d/%m/%Y')
+    start_urls = ['http://www.ambito.com/economia/mercados/monedas/dolar/info/?ric=ARSB=&desde=11/01/2002&hasta={0}&pag=1'.format(mdate)]
     qs = QoreScrapy()
 
     rules = (
-        Rule(SgmlLinkExtractor(allow=r'/economia/mercados/monedas/dolar/info/\?ric=ARSB=&desde=11/01/2002&hasta=15/06/2015&pag=[\d]+'), callback='parse_item', follow=True),
+        Rule(SgmlLinkExtractor(allow=r'/economia/mercados/monedas/dolar/info/\?ric=ARSB=&desde=11/01/2002&hasta={0}&pag=[\d]+'.format(mdate)), callback='parse_item', follow=True),
     )
 
-    # scrapy parse --spider=ambitoUSDARSblue -c parse_item 'http://www.ambito.com/economia/mercados/monedas/dolar/info/?ric=ARSB=&desde=11/01/2002&hasta=15/06/2015&pag=1'
+    # scrapy parse --spider=ambitoUSDARSblue -c parse_item 'http://www.ambito.com/economia/mercados/monedas/dolar/info/?ric=ARSB=&desde=11/01/2002&hasta={0}&pag=1'.format(mdate)
     def parse_item(self, response):
         hxs = HtmlXPathSelector(response)
         item = AmbitousdarsblueItem(
