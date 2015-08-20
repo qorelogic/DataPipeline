@@ -3,7 +3,7 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from numbeo.items import AmbitousdarsblueItem
 
-import sys, time
+import sys, re, time
 try:    sys.path.index('/ml.dev/bin')
 except: sys.path.append('/ml.dev/bin')
 from qore import QoreScrapy
@@ -29,8 +29,10 @@ class AmbitousdarsblueSpider(CrawlSpider):
             venta  = hxs.select('//table//tr/td[3]/div/text()').extract(),
         )
         
-        #for i in xrange(len(item['available_supply'])):
-        #    item['available_supply'][i] = item['available_supply'][i].strip().replace(',','')
+        for i in xrange(len(item['fecha'])):
+            item['fecha'][i] = re.sub(re.compile(r'(.*)\/(.*)\/(.*)'), '\\3-\\2-\\1', item['fecha'][i].strip())
+            item['compra'][i] = item['compra'][i].strip().replace(',','.')
+            item['venta'][i] = item['venta'][i].strip().replace(',','.')
         
         item = self.qs.makeItems(item, 'numbeo.items.AmbitousdarsblueItem')
         #print item
