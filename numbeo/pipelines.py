@@ -71,7 +71,10 @@ class CsvExportPipeline(NumbeoPipeline):
 class MongoDBBrokerPipeline(NumbeoPipeline):
     def __init__(self):
         super(MongoDBBrokerPipeline, self).__init__()
-        connection = pymongo.Connection(MONGODB_SERVER, MONGODB_PORT)
+	try:
+	        connection = pymongo.Connection(MONGODB_SERVER, MONGODB_PORT)
+	except:
+		return
         self.db = connection[MONGODB_DB]
         self.collections = {}
         self.collections['propertyPrices'] = self.db['propertyPrices']
@@ -90,7 +93,8 @@ class MongoDBBrokerPipeline(NumbeoPipeline):
     def process_item(self, item, spider):
         #if not isinstance(item, items.ProfitlyItem):
         #return item # return the item to let other pipeline to handle it
-        self.collections[spider.name].insert(dict(item))
+        try: self.collections[spider.name].insert(dict(item))
+	except: item
         return item # return the item to let other pipeline to handle it
 
 from scrapy import log
