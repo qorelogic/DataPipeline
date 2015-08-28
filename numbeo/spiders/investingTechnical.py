@@ -18,9 +18,9 @@ class InvestingtechnicalSpider(CrawlSpider):
     qs = QoreScrapy()
 
     rules = (
-        Rule(SgmlLinkExtractor(allow=r'/currencies/[\w^-]+-[\w^-]+'), follow=True),
-        Rule(SgmlLinkExtractor(allow=r'/currencies/[\w^-]+-[\w^-]+-technical'), follow=True),
-        Rule(SgmlLinkExtractor(allow=r'/currencies/[\w^-]+-[\w^-]+-technical\?period=[\w\d]+'), callback='parse_item', follow=True),
+        Rule(SgmlLinkExtractor(allow=r'/currencies/[\w]{3}-[\w]{3}'), follow=True),
+        Rule(SgmlLinkExtractor(allow=r'/currencies/[\w]{3}-[\w]{3}-technical'), follow=True),
+        Rule(SgmlLinkExtractor(allow=r'/currencies/[\w]{3}-[\w]{3}-technical\?period=[\w\d]+'), callback='parse_item', follow=False),
     )
 
     # scrapy parse --spider=investingTechnical -c parse_item 'http://www.investing.com/currencies/eur-usd-technical?period=60'
