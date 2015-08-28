@@ -11,6 +11,13 @@ from qore import QoreScrapy
 from qore import fetchURL
 from pandas import DataFrame as p_DataFrame
 
+def parseName(tt):
+    tt = tt.split(' ')
+    ret = []
+    ret.append(' '.join(tt[0:len(tt)-1]))
+    ret.append(tt[len(tt)-1])
+    return ret
+
 import xmltodict #, json
 class ISO:
     
@@ -63,13 +70,6 @@ class InvestingworldgovernmentbondsSpider(CrawlSpider):
             chgpcnt  = hxs.select('//section/table//td[8]/text()').extract(),
             time     = hxs.select('//section/table//td[9]/text()').extract(),
         )
-        
-        def parseName(tt):
-            tt = tt.split(' ')
-            ret = []
-            ret.append(' '.join(tt[0:len(tt)-1]))
-            ret.append(tt[len(tt)-1])
-            return ret
         
         iso = ISO()
         #iso.countryName2CurrencyCode
