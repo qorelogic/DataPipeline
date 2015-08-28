@@ -53,3 +53,17 @@ class AmbitousdarsblueItem(Item):
     fecha  = Field()
     compra = Field()
     venta  = Field()
+
+class InvestingworldgovernmentbondsItem(Item):
+
+    name    = Field()
+    country = Field()
+    currencyCode = Field()
+    period  = Field()
+    iyield  = Field()
+    prev    = Field()
+    high    = Field()
+    low     = Field()
+    chg     = Field()
+    chgpcnt = Field()
+    time    = Field()
