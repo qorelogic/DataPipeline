@@ -67,3 +67,9 @@ class InvestingworldgovernmentbondsItem(Item):
     chg     = Field()
     chgpcnt = Field()
     time    = Field()
+
+class InvestingtechnicalItem(Item):
+
+    name    = Field()
+    summary = Field()
+    period  = Field()
