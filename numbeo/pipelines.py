@@ -85,7 +85,7 @@ class MongoDBBrokerPipeline(NumbeoPipeline):
         self.collections[spider.name] = self.db[spider.name]
         # remove all for clean insertion
         #if spider.name != 'trades' and spider.name != 'brokers':
-        self.collections[spider.name].remove()
+        #self.collections[spider.name].remove()
 
     def spider_closed(self, spider):
         stub=''
