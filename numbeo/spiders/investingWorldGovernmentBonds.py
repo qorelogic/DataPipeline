@@ -56,19 +56,22 @@ class InvestingworldgovernmentbondsSpider(CrawlSpider):
     # response.xpath('//section/table//td[2]/a/text()').extract()
     def parse_item(self, response):
 
+        timestamp = time.time()
+        
         hxs = HtmlXPathSelector(response)
         item = InvestingworldgovernmentbondsItem(
-            name     = hxs.select('//section/table//td[2]/a/text()').extract(),
-            country  = hxs.select('//section/table//td[2]/a/text()').extract(),
-            currencyCode  = hxs.select('//section/table//td[2]/a/text()').extract(),
-            period   = hxs.select('//section/table//td[2]/a/text()').extract(),
-            iyield   = hxs.select('//section/table//td[3]/text()').extract(),
-            prev     = hxs.select('//section/table//td[4]/text()').extract(),
-            high     = hxs.select('//section/table//td[5]/text()').extract(),
-            low      = hxs.select('//section/table//td[6]/text()').extract(),
-            chg      = hxs.select('//section/table//td[7]/text()').extract(),
-            chgpcnt  = hxs.select('//section/table//td[8]/text()').extract(),
-            time     = hxs.select('//section/table//td[9]/text()').extract(),
+            name     = hxs.xpath('//section/table//td[2]/a/text()').extract(),
+            country  = hxs.xpath('//section/table//td[2]/a/text()').extract(),
+            currencyCode  = hxs.xpath('//section/table//td[2]/a/text()').extract(),
+            period   = hxs.xpath('//section/table//td[2]/a/text()').extract(),
+            iyield   = hxs.xpath('//section/table//td[3]/text()').extract(),
+            prev     = hxs.xpath('//section/table//td[4]/text()').extract(),
+            high     = hxs.xpath('//section/table//td[5]/text()').extract(),
+            low      = hxs.xpath('//section/table//td[6]/text()').extract(),
+            chg      = hxs.xpath('//section/table//td[7]/text()').extract(),
+            chgpcnt  = hxs.xpath('//section/table//td[8]/text()').extract(),
+            time     = hxs.xpath('//section/table//td[9]/text()').extract(),
+            timestamp = hxs.xpath('//section/table//td[9]/text()').extract(), # stub
         )
         
         iso = ISO()
@@ -79,7 +82,8 @@ class InvestingworldgovernmentbondsSpider(CrawlSpider):
             item['chgpcnt'][i] = item['chgpcnt'][i].replace('+','').replace('%','')
             item['country'][i] = parseName(item['country'][i])[0]
             item['currencyCode'][i] = parseName(item['currencyCode'][i])[0]
-            item['period'][i]  = parseName(item['period'][i])[1]
+            item['period'][i]       = parseName(item['period'][i])[1]
+            item['timestamp'][i]    = str(timestamp)
         
         item = self.qs.makeItems(item, 'numbeo.items.InvestingworldgovernmentbondsItem')
         #print item

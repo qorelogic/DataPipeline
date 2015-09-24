@@ -67,6 +67,7 @@ class InvestingworldgovernmentbondsItem(Item):
     chg     = Field()
     chgpcnt = Field()
     time    = Field()
+    timestamp = Field()
 
 class InvestingtechnicalItem(Item):
 
