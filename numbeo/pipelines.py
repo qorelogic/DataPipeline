@@ -73,7 +73,8 @@ class MongoDBBrokerPipeline(NumbeoPipeline):
         super(MongoDBBrokerPipeline, self).__init__()
 	try:
 	        connection = pymongo.Connection(MONGODB_SERVER, MONGODB_PORT)
-	except:
+	except Exception as e:
+		print e
 		return
         self.db = connection[MONGODB_DB]
         self.collections = {}
