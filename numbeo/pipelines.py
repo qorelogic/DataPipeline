@@ -73,7 +73,8 @@ class MongoDBBrokerPipeline(NumbeoPipeline):
         super(MongoDBBrokerPipeline, self).__init__()
 	try:
 	        connection = pymongo.Connection(MONGODB_SERVER, MONGODB_PORT)
-	except:
+	except Exception as e:
+		print e
 		return
         self.db = connection[MONGODB_DB]
         self.collections = {}
@@ -85,7 +86,7 @@ class MongoDBBrokerPipeline(NumbeoPipeline):
         self.collections[spider.name] = self.db[spider.name]
         # remove all for clean insertion
         #if spider.name != 'trades' and spider.name != 'brokers':
-        self.collections[spider.name].remove()
+        #self.collections[spider.name].remove()
 
     def spider_closed(self, spider):
         stub=''
@@ -94,7 +95,9 @@ class MongoDBBrokerPipeline(NumbeoPipeline):
         #if not isinstance(item, items.ProfitlyItem):
         #return item # return the item to let other pipeline to handle it
         try: self.collections[spider.name].insert(dict(item))
-	except: item
+	except Exception as e: 
+		print e
+		item
         return item # return the item to let other pipeline to handle it
 
 from scrapy import log
