@@ -74,3 +74,20 @@ class InvestingtechnicalItem(Item):
     name    = Field()
     summary = Field()
     period  = Field()
+
+class CryptoexchangelistItem(Item):
+
+    type         = Field()
+    name         = Field()
+    code         = Field()
+    tradingPairs = Field()
+    volume       = Field()
+
+class CryptoexchangelistCoinsItem(Item):
+
+    type        = Field()
+    name        = Field()
+    symbol      = Field()
+    minedCoins  = Field()
+    difficulty  = Field()
+    volume      = Field()
