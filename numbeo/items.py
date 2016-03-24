@@ -92,6 +92,22 @@ class CryptoexchangelistCoinsItem(Item):
     difficulty  = Field()
     volume      = Field()
 
+class ArbitrageItem(Item):
+
+    profit        = Field()
+    source        = Field()
+    amount        = Field()
+    unit          = Field()
+    buy           = Field()
+    trade         = Field()
+    time          = Field()
+    fromCoin      = Field()
+    toCoin        = Field()
+    highestBid    = Field()
+    lowestAsk     = Field()
+    spread        = Field()
+    maximumVolume = Field()
+
 class DigikeyAllproductsItem(Item):
     
 	Datasheet = Field()
