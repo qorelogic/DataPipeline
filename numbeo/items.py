@@ -140,3 +140,10 @@ class DigikeyAllproductsItem(Item):
 	Operating_Temperature = Field()
 	Package_Case = Field()
 	Supplier_Device_Package = Field()
+
+
+class ArcoirisproductsItem(Item):
+    
+	code  = Field()
+	desc  = Field()
+	price = Field()
