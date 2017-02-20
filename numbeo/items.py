@@ -147,3 +147,14 @@ class ArcoirisproductsItem(Item):
 	code  = Field()
 	desc  = Field()
 	price = Field()
+
+class ProxyItem(Item):
+    
+	host = Field()
+	port = Field()
+	updated = Field()
+	latency = Field()
+	reliability = Field()
+	ntype = Field()
+	ssl = Field()
+	country = Field()
