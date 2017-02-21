@@ -90,3 +90,25 @@ class ProxiesSpider(CrawlSpider):
         
         item = self.qs.makeItems(item, 'numbeo.items.ProxyItem')
         return item
+
+    # scrapy shell 'http://whatismyipaddress.com'
+    # scrapy parse --spider=proxies -c parse_item_whatismyipaddress 'http://whatismyipaddress.com'
+    def parse_item_whatismyipaddress(self, response):
+        hxs = HtmlXPathSelector(response)
+        item = IPAddressItem(
+            ip  = hxs.select('//*[@id="section_left"]/div[2]/a/text()').extract(),
+        )
+        item = self.qs.makeItems(item, 'numbeo.items.IPAddressItem')
+        return item
+
+    # scrapy shell 'http://www.whatsmyip.org'
+    # scrapy parse --spider=proxies -c parse_item_whatsmyip 'http://www.whatsmyip.org'
+    def parse_item_whatsmyip(self, response):
+        hxs = HtmlXPathSelector(response)
+        item = IPAddressItem(
+            ip  = hxs.select('//*[@id="ip"]/text()').extract(),
+            hostname  = hxs.select('//*[@id="hostname"]/text()').extract(),
+            userAgent  = hxs.select('//*[@id="useragent"]/text()').extract(),
+        )
+        item = self.qs.makeItems(item, 'numbeo.items.IPAddressItem')
+        return item

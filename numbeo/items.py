@@ -148,6 +148,12 @@ class ArcoirisproductsItem(Item):
 	desc  = Field()
 	price = Field()
 
+class IPAddressItem(Item):
+    
+	ip = Field()
+	hostname = Field()
+	userAgent = Field()
+
 class ProxyItem(Item):
     
 	host = Field()
