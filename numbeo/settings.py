@@ -13,6 +13,12 @@ SPIDER_MODULES = ['numbeo.spiders']
 NEWSPIDER_MODULE = 'numbeo.spiders'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
+
+DOWNLOADER_MIDDLEWARES = {
+'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+'numbeo.middlewares.ProxyMiddleware': 100,
+}
+
 ITEM_PIPELINES = {
     BOT_NAME+'.pipelines.CsvExportPipeline': 2000,
     BOT_NAME+'.pipelines.JsonWithEncodingPipeline': 3000,
