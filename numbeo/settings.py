@@ -11,8 +11,12 @@ BOT_VERSION = '1.0'
 
 SPIDER_MODULES = ['numbeo.spiders']
 NEWSPIDER_MODULE = 'numbeo.spiders'
-USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
+import random as rr
+# user_agents.txt from: http://willdrevo.com/public/text/user_agents.txt
+userAgents = open('user_agents.txt').read().split('\n')
+USER_AGENT = rr.choice(userAgents)
+#USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 
 DOWNLOADER_MIDDLEWARES = {
 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
