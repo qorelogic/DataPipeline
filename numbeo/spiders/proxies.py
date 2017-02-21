@@ -67,7 +67,7 @@ class ProxiesSpider(CrawlSpider):
         item = self.qs.makeItems(item, 'numbeo.items.ProxyItem')
         return item
 
-    # scrapy shell 'http://proxylist.hidemyass.com/4'
+    # scrapy shell 'http://www.xroxy.com/proxylist.php?port=&type=&ssl=&country=&latency=&reliability=&sort=reliability&desc=true&pnum=0#table'
     #   sel.select('<xpath>').extract()
     # scrapy parse --spider=proxies -c parse_item_xroxy 'http://www.xroxy.com/proxylist.php?port=&type=&ssl=&country=&latency=&reliability=&sort=reliability&desc=true&pnum=0#table'
     def parse_item_xroxy(self, response):
@@ -87,6 +87,7 @@ class ProxiesSpider(CrawlSpider):
         li = p.DataFrame(li)
         for i in list(li[li[0] == '\n'].index):
             li = li.drop(i)
+        li[0] = map(lambda x: x.replace('\n', ''), li[0])
         item['host'] = list(li[0])
         
         item = self.qs.makeItems(item, 'numbeo.items.ProxyItem')
