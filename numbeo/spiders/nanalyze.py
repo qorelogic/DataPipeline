@@ -23,6 +23,7 @@ class NanalyzeSpider(CrawlSpider):
 
     rules = (
         Rule(SgmlLinkExtractor(allow=r'articles/page/[\d]+.*'), callback='parse_item_bookmarks', follow=True),
+        Rule(SgmlLinkExtractor(allow=r'tag/[\w\d\-]+.*'), callback='parse_item_tags', follow=True),
     )
 
     # scrapy shell 'http://www.nanalyze.com/articles/page/1/'
@@ -34,6 +35,20 @@ class NanalyzeSpider(CrawlSpider):
             title = hxs.select('//*[@id="container"]/article/header/h2/a/text()').extract(),
             url   = hxs.select('//*[@id="container"]/article/header/h2/a/@href').extract(),
             type  = hxs.select('//*[@id="container"]/article/header/h2/a/@rel').extract(),
+        )
+        
+        item = self.qs.makeItems(item, 'numbeo.items.NanalyzeArticleItem')
+        return item
+
+    # scrapy shell 'http://www.nanalyze.com/articles/page/1/'
+    #   sel.select('<xpath>').extract()
+    # scrapy parse --spider=nanalyze -c parse_item_tags 'http://www.nanalyze.com/articles/page/1/'
+    def parse_item_tags(self, response):
+        hxs = HtmlXPathSelector(response)
+        item = NanalyzeArticleItem(
+            title = hxs.select('//*[@id="container"]/article/footer/p/span[2]/a[@rel="tag"]/text()').extract(),
+            url   = hxs.select('//*[@id="container"]/article/footer/p/span[2]/a[@rel="tag"]/@href').extract(),
+            type  = hxs.select('//*[@id="container"]/article/footer/p/span[2]/a[@rel="tag"]/@rel').extract(),
         )
         
         item = self.qs.makeItems(item, 'numbeo.items.NanalyzeArticleItem')
