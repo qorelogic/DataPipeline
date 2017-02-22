@@ -154,6 +154,12 @@ class IPAddressItem(Item):
 	hostname = Field()
 	userAgent = Field()
 
+class NanalyzeArticleItem(Item):
+    
+	title = Field()
+	url = Field()
+	type = Field()
+
 class ProxyItem(Item):
     
 	host = Field()
