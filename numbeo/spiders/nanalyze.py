@@ -22,13 +22,13 @@ class NanalyzeSpider(CrawlSpider):
     qs = QoreScrapy()
 
     rules = (
-        Rule(SgmlLinkExtractor(allow=r'articles/page/[\d]+.*'), callback='parse_item', follow=True),
+        Rule(SgmlLinkExtractor(allow=r'articles/page/[\d]+.*'), callback='parse_item_bookmarks', follow=True),
     )
 
     # scrapy shell 'http://www.nanalyze.com/articles/page/1/'
     #   sel.select('<xpath>').extract()
-    # scrapy parse --spider=nanalyze -c parse_item 'http://www.nanalyze.com/articles/page/1/'
-    def parse_item(self, response):
+    # scrapy parse --spider=nanalyze -c parse_item_bookmarks 'http://www.nanalyze.com/articles/page/1/'
+    def parse_item_bookmarks(self, response):
         hxs = HtmlXPathSelector(response)
         item = NanalyzeArticleItem(
             title = hxs.select('//*[@id="container"]/article/header/h2/a/text()').extract(),
