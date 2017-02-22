@@ -32,8 +32,8 @@ class NanalyzeSpider(CrawlSpider):
         hxs = HtmlXPathSelector(response)
         item = NanalyzeArticleItem(
             title = hxs.select('//*[@id="container"]/article/header/h2/a/text()').extract(),
-            url = hxs.select('//*[@id="container"]/article/header/h2/a/@href').extract(),
-            type = hxs.select('//*[@id="container"]/article/header/h2/a/@rel').extract(),
+            url   = hxs.select('//*[@id="container"]/article/header/h2/a/@href').extract(),
+            type  = hxs.select('//*[@id="container"]/article/header/h2/a/@rel').extract(),
         )
         
         item = self.qs.makeItems(item, 'numbeo.items.NanalyzeArticleItem')
