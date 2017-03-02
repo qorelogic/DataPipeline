@@ -170,3 +170,12 @@ class ProxyItem(Item):
 	ntype = Field()
 	ssl = Field()
 	country = Field()
+
+class StartupsItem(Item):
+    
+	name = Field()
+	url = Field()
+	location = Field()
+	industry = Field()
+	description = Field()
+
