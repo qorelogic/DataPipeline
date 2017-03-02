@@ -179,3 +179,15 @@ class StartupsItem(Item):
 	industry = Field()
 	description = Field()
 
+class BusinessForSaleItem(Item):
+    
+	name = Field()
+	url = Field()
+	location = Field()
+	city = Field()
+	country = Field()
+	price    = Field()
+	currency = Field()
+	revenue  = Field()
+	cashflow = Field()
+	description = Field()
