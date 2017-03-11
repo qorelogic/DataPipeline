@@ -191,3 +191,9 @@ class BusinessForSaleItem(Item):
 	revenue  = Field()
 	cashflow = Field()
 	description = Field()
+
+class TickersItem(Item):
+    
+	symbol = Field()
+	name = Field()
+	exchange = Field()
