@@ -197,3 +197,10 @@ class TickersItem(Item):
 	symbol = Field()
 	name = Field()
 	exchange = Field()
+
+class BrokerItem(Item):
+    
+	name = Field()
+	url = Field()
+	website = Field()
+	address = Field()
