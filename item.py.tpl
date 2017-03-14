@@ -1,4 +1,4 @@
 
-class {{item}}(Item):
+class {{item}}Item(Item):
 
         name = Field()
