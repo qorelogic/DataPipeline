@@ -204,3 +204,7 @@ class BrokerItem(Item):
 	url = Field()
 	website = Field()
 	address = Field()
+
+class productItem(Item):
+
+        name = Field()
