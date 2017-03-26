@@ -1,5 +1,5 @@
 
-from scrapy.selector import HtmlXPathSelector
+from scrapy.selector import Selector
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from numbeo.items import {{item}}Item
@@ -25,12 +25,12 @@ class {{name}}Spider(CrawlSpider):
         Rule(SgmlLinkExtractor(allow=r'stocklist\/[\w]+/[\w]+\.htm$'), callback='parse_item_{{name}}', follow=True),
     )
     # scrapy shell '{{url}}'
-    #   sel.select('<xpath>').extract()
+    #   sel.xpath('<xpath>').extract()
     # scrapy parse --spider={{name}} -c parse_item_{{name}} '{{url}}'
     def parse_item_{{name}}(self, response):
-        hxs = HtmlXPathSelector(response)
+        hxs = Selector(response)
         item = {{item}}Item(
-            name     = hxs.select('//table... /text()').extract(),
+            name     = hxs.xpath('//table... /text()').extract(),
         )
 
         #item = self.xp.fixNewlines(item, 'name',    '\r\n')
