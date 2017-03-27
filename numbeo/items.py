@@ -208,3 +208,13 @@ class BrokerItem(Item):
 class productItem(Item):
 
         name = Field()
+
+class amzBestSellersItem(Item):
+
+  name = Field()
+  url  = Field()
+  img  = Field()
+  feedback = Field()
+  reviews = Field()
+  productReviews = Field()
+  canonical = Field()
